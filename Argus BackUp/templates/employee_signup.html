@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArgusScan | Employee Register</title>
+
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#0d6efd">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../static/css/employee_signup.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light"> <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="../static/assets/images/innova.png" alt="Company Logo" height="30" class="me-2">
+        <span class="d-none d-md-inline brand-text">
+                    <span class="brand-argus">Argus</span><span class="brand-scan">Scan</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">
+              <i class="bi bi-house-door-fill me-1"></i> Home
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ <main class="container my-4 flex-grow-1">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="portal-card">
+          <div class="portal-card-header text-center">
+            <h3 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Create Your Account</h3>
+          </div>
+          <div class="portal-card-body">
+            <form id="employeeSignupForm" class="needs-validation" novalidate>
+              <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label for="fullName" class="form-label portal-form-label">Full Name</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control portal-form-control" id="fullName" name="fullName" required>
+                    <div class="invalid-feedback">
+                      Please provide your full name.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="empId" class="form-label portal-form-label">Employee ID</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-person-badge-fill"></i></span>
+                    <input type="text" class="form-control portal-form-control" id="empId" name="empId" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid employee ID.
+                    </div>
+                  </div>
+                  <div id="empIdError" class="error-message"></div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <label for="email" class="form-label portal-form-label">Company Email</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control portal-form-control" id="email" name="email"
+                          pattern=".+@innovasolutions\.com$" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid @innovasolutions.com email address.
+                    </div>
+                  </div>
+                  <div id="emailError" class="error-message"></div>
+                </div>
+                <div class="col-md-6">
+                  <label for="personalEmail" class="form-label portal-form-label">Personal Email</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-envelope-at-fill"></i></span>
+                    <input type="email" class="form-control portal-form-control" id="personalEmail" name="personalEmail">
+                    <div class="invalid-feedback">
+                      Please provide a valid personal email address.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="md-6 mb-3 mb-md-0">
+                  <label for="password" class="form-label portal-form-label">Create Password</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control portal-form-control" id="password" name="password" minlength="8" required>
+                    <button class="btn btn-outline-secondary password-toggle" type="button" id="togglePassword">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                    <div class="invalid-feedback">
+                      Password must be at least 8 characters.
+                    </div>
+                  </div>
+                  <div class="password-strength mt-2">
+                    <div class="password-strength-bar" id="passwordStrength"></div>
+                  </div>
+                  <div class="password-hints" id="passwordHints">
+                    <ul>
+                      <li class="invalid" id="lengthHint">At least 8 characters</li>
+                      <li class="invalid" id="uppercaseHint">At least one uppercase letter</li>
+                      <li class="invalid" id="numberHint">At least one number</li>
+                      <li class="invalid" id="specialHint">At least one special character</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="confirmPassword" class="form-label portal-form-label">Confirm Password</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="bi bi-check-circle-fill"></i></span>
+                    <input type="password" class="form-control portal-form-control" id="confirmPassword" name="confirmPassword" required>
+                    <button class="btn btn-outline-secondary password-toggle" type="button" id="toggleConfirmPassword">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                    <div class="invalid-feedback">
+                      Passwords must match.
+                    </div>
+                  </div>
+                  <div id="confirmPasswordError" class="error-message"></div>
+                </div>
+              </div>
+
+              <div class="mb-4 text-center">
+                <div class="camera-container mb-3">
+                  <video id="signupFacecam" width="320" height="240" autoplay class="face-camera"></video>
+                  <canvas id="signupCanvas" style="display:none;"></canvas>
+                </div>
+                <input type="hidden" name="capturedImage" id="capturedImage">
+                <button type="button" id="captureBtn" class="btn portal-btn-primary w-50 py-2">
+                  <i class="bi bi-camera-fill me-2"></i>Capture Photo
+                </button>
+                <div id="photoStatus" class="small text-muted mt-2" style="display:none;">
+                  <i class="bi bi-check-circle-fill text-success me-1"></i>Photo captured
+                </div>
+                <div id="faceError" class="error-message mt-2"></div>
+              </div>
+
+              <button type="submit" class="btn portal-btn-primary w-100 py-2 mb-3" id="registerButton">
+                <i class="bi bi-check-lg me-2"></i> Register
+              </button>
+            </form>
+
+            <div id="signupMessage" class="alert mt-3 text-center d-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="text-center text-white-50">
+                <span>&copy; 2025 InnovaSolutions. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notification</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body"></div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/employee_signup.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/js/service-worker.js')
+        .then(reg => console.log('Service Worker registered:', reg.scope))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
+</body>
+</html>

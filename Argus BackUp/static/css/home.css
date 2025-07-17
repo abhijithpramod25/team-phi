@@ -1,0 +1,315 @@
+:root {
+  /* Black and White Color Palette */
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --header-bg-color: #f8f9fa;
+  --border-color: #dee2e6;
+  --dark-accent: #212529;
+  --white-color: #ffffff;
+  --secondary-text: #6c757d;
+  
+  /* Unique Accent Colors */
+  --brand-color-1: #4a6da7; /* Slate Blue */
+  --brand-color-2: #6a8cc8; /* Lighter Slate Blue */
+
+  /* Status Colors for Home Page */
+  --status-success-bg: #28a745; /* A standard green for success */
+  --status-success-text: #ffffff;
+  --status-out-bg: #6c757d;    /* A darker grey for punched out */
+  --status-out-text: #ffffff;
+
+  /* UI Properties */
+  --border-radius: 12px;
+  --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  --transition-fast: all 0.2s ease-in-out;
+}
+
+/* --- Base & Typography --- */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.7;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Navbar --- */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--white-color) !important; /* Standardized to white */
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar .navbar-brand {
+    font-weight: 700;
+}
+
+/* Two-tone brand text styles */
+.brand-text {
+    font-weight: 700;
+}
+.brand-argus {
+    color: var(--brand-color-1);
+}
+.brand-scan {
+    color: var(--brand-color-2);
+}
+
+
+.navbar .nav-link {
+    color: var(--dark-accent) !important;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+    color: var(--secondary-text) !important;
+}
+
+.navbar .nav-item .btn {
+    transition: var(--transition-fast);
+    background-color: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--white-color) !important;
+}
+
+.navbar .nav-item .btn:hover {
+    background-color: #343a40;
+    border-color: #343a40;
+    transform: translateY(-2px);
+}
+
+/* --- Main Header --- */
+.main-header {
+  background-color: var(--header-bg-color);
+  color: var(--text-color);
+  padding: 3rem 1rem; /* Reduced padding */
+  text-align: center;
+  position: relative;
+}
+
+.main-header .container {
+    animation: fadeIn 1s ease-out;
+}
+
+.main-header h1 {
+  font-size: 2.2rem; /* Smaller font size */
+  font-weight: 700;
+  animation: slideInDown 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.main-header p {
+  font-size: 1rem; /* Smaller font size */
+  color: var(--secondary-text);
+  margin-top: 0.5rem;
+  animation: slideInDown 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+/* --- Containers & Cards --- */
+.auth-container,
+.sidebar {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1s forwards;
+  opacity: 0;
+  padding: 2rem;
+}
+.col-lg-8 { animation-delay: 0.2s; }
+.col-lg-4 { animation-delay: 0.4s; }
+
+.auth-container:hover,
+.sidebar:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
+h2.fw-semibold { color: var(--text-color); }
+
+/* --- Sidebar --- */
+.sidebar {
+  position: sticky;
+  top: calc(1rem + 80px);
+}
+.sidebar-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+  padding-bottom: 0.75rem;
+}
+.sidebar-nav { list-style: none; padding: 0; margin: 0; }
+.sidebar-nav li a {
+  display: flex; align-items: center; padding: 0.75rem 0.5rem;
+  color: var(--secondary-text); text-decoration: none; transition: var(--transition-fast);
+  border-radius: 8px;
+}
+.sidebar-nav li a:hover {
+  color: var(--text-color); background-color: var(--header-bg-color);
+}
+
+/* --- Employee Authentication --- */
+.nav-tabs {
+  border-bottom: 1px solid var(--border-color);
+}
+.nav-tabs .nav-link {
+  font-weight: 500;
+  padding: 0.75rem 0.25rem;
+  margin: 0 1rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--secondary-text);
+  transition: var(--transition-fast);
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+  color: var(--text-color);
+  border-bottom-color: var(--text-color);
+}
+.tab-content .tab-pane {
+    animation: fadeIn 0.5s;
+    padding-top: 1.5rem;
+}
+
+/* --- Camera Area --- */
+.camera-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background-color: var(--border-color);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+  min-height: 280px;
+  overflow: hidden;
+}
+.face-camera {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+.recognition-status {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* --- User Info Section (after recognition) --- */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.user-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--brand-color-1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+}
+
+.user-info h4 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-accent);
+}
+
+.user-info p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-info .status-badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+.user-info .status-in {
+  background-color: var(--status-success-bg);
+  color: var(--status-success-text);
+}
+
+.user-info .status-out {
+  background-color: var(--status-out-bg);
+  color: var(--status-out-text);
+}
+
+.date-time-info {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+}
+
+/* --- Location Status --- */
+.location-status {
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: var(--dark-accent);
+}
